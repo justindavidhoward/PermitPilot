@@ -76,3 +76,4 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 app.listen(port, '0.0.0.0', () => {
   console.log(`PermitPilot API server listening on http://0.0.0.0:${port}`);
 });
+console.log("PermitPilot v2 - SQLite edition");
