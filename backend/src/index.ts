@@ -7,20 +7,16 @@ import paymentRoutes from './routes/payments';
 import webhookRoutes from './routes/webhooks';
 import path from 'path';
 import { runMigrations } from './migrate';
-import { getDatabaseUrl } from './db';
 
 dotenv.config();
 
 const app = express();
 const port = parseInt(process.env.PORT || '3000');
 
-// Run migrations if a database URL is available
-const dbUrl = getDatabaseUrl();
-if (dbUrl) {
-  runMigrations().catch(err => {
-    console.error('Failed to run migrations:', err);
-  });
-}
+// Run database migrations
+runMigrations().catch(err => {
+  console.error('Failed to run migrations:', err);
+});
 
 // Middleware
 app.use(cors());

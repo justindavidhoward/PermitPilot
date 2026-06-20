@@ -14,6 +14,7 @@ RUN npm run build
 
 FROM node:20-slim
 WORKDIR /app
+RUN mkdir -p /app/data
 COPY --from=backend-build /app/backend/dist ./backend/dist
 COPY --from=backend-build /app/backend/node_modules ./backend/node_modules
 COPY --from=backend-build /app/backend/package.json ./backend/package.json
