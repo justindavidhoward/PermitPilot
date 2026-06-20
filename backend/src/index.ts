@@ -57,7 +57,13 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   if (req.path.startsWith('/api') || req.path.startsWith('/health')) {
     return next();
   }
-  res.sendFile(path.join(frontendDistPath, 'index.html'));
+  const indexPath = path.join(frontendDistPath, 'index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      // Frontend not built yet — serve a basic page
+      res.status(200).send(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>PermitPilot</title><style>body{font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f8fafc;color:#1e293b}.card{text-align:center;padding:2rem;max-width:500px}h1{color:#4f46e5;font-size:2rem;margin-bottom:.5rem}p{color:#64748b;line-height:1.6}.badge{display:inline-block;background:#e0e7ff;color:#4338ca;padding:.25rem .75rem;border-radius:9999px;font-size:.875rem;font-weight:600;margin-top:1rem}</style></head><body><div class="card"><h1>🏗️ PermitPilot</h1><p>AI-powered building permit navigation. The API is running.<br>Frontend is being prepared for deployment.</p><div class="badge">✅ API Live</div></div></body></html>`);
+    }
+  });
 });
 
 // Error handling middleware
