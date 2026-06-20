@@ -1,0 +1,722 @@
+/* ===================================================================
+   PermitPilot Design System — v1.0
+   ===================================================================
+   A formal design system built on CSS custom properties.
+   Import this in your main stylesheet or alongside Tailwind.
+   =================================================================== */
+
+/* Inter font import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ===================================================================
+   1. DESIGN TOKENS (CSS Custom Properties)
+   =================================================================== */
+:root {
+  /* ---- Primary Brand ---- */
+  --pp-primary-50: #EEF2FF;
+  --pp-primary-100: #E0E7FF;
+  --pp-primary-200: #C7D2FE;
+  --pp-primary-300: #A5B4FC;
+  --pp-primary-400: #818CF8;
+  --pp-primary-500: #6366F1;
+  --pp-primary-600: #4F46E5;
+  --pp-primary-700: #4338CA;
+  --pp-primary-800: #3730A3;
+  --pp-primary-900: #312E81;
+
+  /* ---- Accent Colors ---- */
+  --pp-accent-blue: #3B82F6;
+  --pp-accent-teal: #0D9488;
+  --pp-accent-amber: #D97706;
+  --pp-accent-purple: #7C3AED;
+
+  /* ---- Neutral / Slate ---- */
+  --pp-neutral-50: #F8FAFC;
+  --pp-neutral-100: #F1F5F9;
+  --pp-neutral-200: #E2E8F0;
+  --pp-neutral-300: #CBD5E1;
+  --pp-neutral-400: #94A3B8;
+  --pp-neutral-500: #64748B;
+  --pp-neutral-600: #475569;
+  --pp-neutral-700: #334155;
+  --pp-neutral-800: #1E293B;
+  --pp-neutral-900: #0F172A;
+
+  /* ---- Semantic Colors ---- */
+  --pp-success-50: #ECFDF5;
+  --pp-success-500: #10B981;
+  --pp-success-600: #059669;
+  --pp-success-800: #065F46;
+  --pp-warning-50: #FFFBEB;
+  --pp-warning-500: #F59E0B;
+  --pp-warning-600: #D97706;
+  --pp-warning-800: #92400E;
+  --pp-error-50: #FEF2F2;
+  --pp-error-500: #EF4444;
+  --pp-error-600: #DC2626;
+  --pp-error-800: #991B1B;
+  --pp-info-50: #EFF6FF;
+  --pp-info-500: #3B82F6;
+  --pp-info-600: #2563EB;
+
+  /* ---- Typography ---- */
+  --pp-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pp-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  --pp-text-xs: 0.75rem;
+  --pp-text-sm: 0.875rem;
+  --pp-text-base: 1rem;
+  --pp-text-lg: 1.125rem;
+  --pp-text-xl: 1.25rem;
+  --pp-text-2xl: 1.5rem;
+  --pp-text-3xl: 1.875rem;
+  --pp-text-4xl: 2.25rem;
+  --pp-text-5xl: 3rem;
+  --pp-text-6xl: 3.75rem;
+
+  --pp-leading-tight: 1.15;
+  --pp-leading-normal: 1.5;
+  --pp-leading-relaxed: 1.6;
+
+  /* ---- Spacing (4px grid) ---- */
+  --pp-space-1: 0.25rem;
+  --pp-space-2: 0.5rem;
+  --pp-space-3: 0.75rem;
+  --pp-space-4: 1rem;
+  --pp-space-5: 1.25rem;
+  --pp-space-6: 1.5rem;
+  --pp-space-8: 2rem;
+  --pp-space-10: 2.5rem;
+  --pp-space-12: 3rem;
+  --pp-space-16: 4rem;
+  --pp-space-20: 5rem;
+
+  /* ---- Border Radius ---- */
+  --pp-radius-sm: 0.375rem;
+  --pp-radius-md: 0.5rem;
+  --pp-radius-lg: 0.75rem;
+  --pp-radius-xl: 1rem;
+  --pp-radius-2xl: 1.5rem;
+  --pp-radius-full: 9999px;
+
+  /* ---- Shadows ---- */
+  --pp-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --pp-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --pp-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --pp-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --pp-shadow-glow: 0 0 20px rgba(79, 70, 229, 0.15);
+
+  /* ---- Transitions ---- */
+  --pp-transition-fast: 150ms ease;
+  --pp-transition-base: 200ms ease;
+  --pp-transition-slow: 300ms ease;
+  --pp-transition-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===================================================================
+   2. BASE / RESET
+   =================================================================== */
+body {
+  font-family: var(--pp-font-family);
+  font-size: var(--pp-text-base);
+  line-height: var(--pp-leading-normal);
+  color: var(--pp-neutral-600);
+  background-color: var(--pp-neutral-50);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===================================================================
+   3. TYPOGRAPHY UTILITIES
+   =================================================================== */
+.pp-heading-1 {
+  font-size: var(--pp-text-4xl);
+  font-weight: 900;
+  line-height: var(--pp-leading-tight);
+  color: var(--pp-neutral-800);
+  letter-spacing: -0.02em;
+}
+
+.pp-heading-2 {
+  font-size: var(--pp-text-3xl);
+  font-weight: 800;
+  line-height: var(--pp-leading-tight);
+  color: var(--pp-neutral-800);
+  letter-spacing: -0.015em;
+}
+
+.pp-heading-3 {
+  font-size: var(--pp-text-2xl);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--pp-neutral-800);
+}
+
+.pp-heading-4 {
+  font-size: var(--pp-text-xl);
+  font-weight: 700;
+  line-height: var(--pp-leading-tight);
+  color: var(--pp-neutral-800);
+}
+
+.pp-body {
+  font-size: var(--pp-text-base);
+  line-height: var(--pp-leading-relaxed);
+  color: var(--pp-neutral-600);
+}
+
+.pp-body-sm {
+  font-size: var(--pp-text-sm);
+  line-height: var(--pp-leading-normal);
+  color: var(--pp-neutral-500);
+}
+
+.pp-caption {
+  font-size: var(--pp-text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pp-neutral-400);
+}
+
+.pp-mono {
+  font-family: var(--pp-font-mono);
+}
+
+/* ===================================================================
+   4. BUTTONS
+   =================================================================== */
+.pp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pp-space-2);
+  font-family: var(--pp-font-family);
+  font-weight: 600;
+  font-size: var(--pp-text-sm);
+  line-height: 1;
+  border: none;
+  cursor: pointer;
+  transition: all var(--pp-transition-base);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Sizes */
+.pp-btn-sm { padding: 0.375rem 0.75rem; font-size: var(--pp-text-xs); border-radius: var(--pp-radius-sm); }
+.pp-btn-md { padding: 0.5rem 1rem; border-radius: var(--pp-radius-md); }
+.pp-btn-lg { padding: 0.625rem 1.5rem; font-size: var(--pp-text-base); border-radius: var(--pp-radius-lg); }
+.pp-btn-xl { padding: 0.75rem 2rem; font-size: var(--pp-text-base); border-radius: var(--pp-radius-lg); }
+
+/* Primary */
+.pp-btn-primary {
+  background-color: var(--pp-primary-600);
+  color: #fff;
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+}
+.pp-btn-primary:hover {
+  background-color: var(--pp-primary-700);
+  box-shadow: 0 6px 10px -1px rgba(79, 70, 229, 0.25);
+  transform: translateY(-1px);
+}
+.pp-btn-primary:active {
+  background-color: var(--pp-primary-800);
+  transform: translateY(0);
+}
+.pp-btn-primary:disabled {
+  background-color: var(--pp-primary-300);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Secondary */
+.pp-btn-secondary {
+  background-color: transparent;
+  color: var(--pp-neutral-700);
+  border: 1.5px solid var(--pp-neutral-200);
+}
+.pp-btn-secondary:hover {
+  border-color: var(--pp-neutral-300);
+  background-color: var(--pp-neutral-50);
+}
+
+/* Ghost */
+.pp-btn-ghost {
+  background-color: transparent;
+  color: var(--pp-neutral-600);
+}
+.pp-btn-ghost:hover {
+  background-color: var(--pp-neutral-100);
+  color: var(--pp-neutral-800);
+}
+
+/* Danger */
+.pp-btn-danger {
+  background-color: var(--pp-error-500);
+  color: #fff;
+}
+.pp-btn-danger:hover {
+  background-color: var(--pp-error-600);
+}
+
+/* Full width */
+.pp-btn-block { width: 100%; }
+
+/* ===================================================================
+   5. CARDS
+   =================================================================== */
+.pp-card {
+  background-color: #fff;
+  border: 1px solid var(--pp-neutral-200);
+  border-radius: var(--pp-radius-xl);
+  box-shadow: var(--pp-shadow-sm);
+  transition: box-shadow var(--pp-transition-base), transform var(--pp-transition-base);
+}
+.pp-card:hover {
+  box-shadow: var(--pp-shadow-md);
+}
+.pp-card-header {
+  padding: var(--pp-space-4) var(--pp-space-6);
+  border-bottom: 1px solid var(--pp-neutral-200);
+  background-color: var(--pp-neutral-50);
+  border-radius: var(--pp-radius-xl) var(--pp-radius-xl) 0 0;
+}
+.pp-card-body {
+  padding: var(--pp-space-6);
+}
+.pp-card-footer {
+  padding: var(--pp-space-4) var(--pp-space-6);
+  border-top: 1px solid var(--pp-neutral-200);
+}
+
+/* Featured card (e.g., pricing highlight) */
+.pp-card-featured {
+  border-color: var(--pp-primary-600);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1), var(--pp-shadow-lg);
+  transform: scale(1.02);
+}
+
+/* ===================================================================
+   6. FORM ELEMENTS
+   =================================================================== */
+.pp-input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--pp-font-family);
+  font-size: var(--pp-text-sm);
+  line-height: 1.5;
+  color: var(--pp-neutral-700);
+  background-color: #fff;
+  border: 1.5px solid var(--pp-neutral-300);
+  border-radius: var(--pp-radius-md);
+  transition: all var(--pp-transition-fast);
+  outline: none;
+}
+.pp-input::placeholder {
+  color: var(--pp-neutral-400);
+}
+.pp-input:focus {
+  border-color: var(--pp-primary-400);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.pp-input-error {
+  border-color: var(--pp-error-500);
+}
+.pp-input-error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.pp-label {
+  display: block;
+  font-size: var(--pp-text-sm);
+  font-weight: 600;
+  color: var(--pp-neutral-700);
+  margin-bottom: var(--pp-space-1);
+}
+
+.pp-select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  font-family: var(--pp-font-family);
+  font-size: var(--pp-text-sm);
+  color: var(--pp-neutral-700);
+  background-color: #fff;
+  border: 1.5px solid var(--pp-neutral-300);
+  border-radius: var(--pp-radius-md);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+}
+.pp-select:focus {
+  border-color: var(--pp-primary-400);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.pp-checkbox {
+  width: 1rem;
+  height: 1rem;
+  border: 1.5px solid var(--pp-neutral-300);
+  border-radius: var(--pp-radius-sm);
+  accent-color: var(--pp-primary-600);
+  cursor: pointer;
+}
+
+.pp-textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--pp-font-family);
+  font-size: var(--pp-text-sm);
+  line-height: 1.6;
+  color: var(--pp-neutral-700);
+  background-color: #fff;
+  border: 1.5px solid var(--pp-neutral-300);
+  border-radius: var(--pp-radius-md);
+  resize: vertical;
+  outline: none;
+  transition: all var(--pp-transition-fast);
+}
+.pp-textarea:focus {
+  border-color: var(--pp-primary-400);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Input with icon */
+.pp-input-group {
+  position: relative;
+}
+.pp-input-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  color: var(--pp-neutral-400);
+  pointer-events: none;
+}
+.pp-input-icon ~ .pp-input,
+.pp-input-icon ~ input {
+  padding-left: 2.25rem;
+}
+
+/* ===================================================================
+   7. BADGES / TAGS
+   =================================================================== */
+.pp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--pp-radius-full);
+  border: 1px solid transparent;
+  line-height: 1.4;
+}
+
+.pp-badge-primary {
+  background-color: var(--pp-primary-50);
+  color: var(--pp-primary-700);
+  border-color: var(--pp-primary-100);
+}
+.pp-badge-success {
+  background-color: var(--pp-success-50);
+  color: var(--pp-success-800);
+  border-color: #A7F3D0;
+}
+.pp-badge-warning {
+  background-color: var(--pp-warning-50);
+  color: var(--pp-warning-800);
+  border-color: #FDE68A;
+}
+.pp-badge-error {
+  background-color: var(--pp-error-50);
+  color: var(--pp-error-800);
+  border-color: #FECACA;
+}
+.pp-badge-info {
+  background-color: var(--pp-info-50);
+  color: #1E40AF;
+  border-color: #BFDBFE;
+}
+.pp-badge-neutral {
+  background-color: var(--pp-neutral-100);
+  color: var(--pp-neutral-700);
+  border-color: var(--pp-neutral-200);
+}
+
+/* ===================================================================
+   8. ALERTS
+   =================================================================== */
+.pp-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--pp-space-3);
+  padding: var(--pp-space-4);
+  border-radius: var(--pp-radius-lg);
+  border-left: 4px solid transparent;
+  font-size: var(--pp-text-sm);
+  line-height: 1.5;
+}
+
+.pp-alert-success {
+  background-color: var(--pp-success-50);
+  border-left-color: var(--pp-success-500);
+  color: var(--pp-success-800);
+}
+.pp-alert-warning {
+  background-color: var(--pp-warning-50);
+  border-left-color: var(--pp-warning-500);
+  color: var(--pp-warning-800);
+}
+.pp-alert-error {
+  background-color: var(--pp-error-50);
+  border-left-color: var(--pp-error-500);
+  color: var(--pp-error-800);
+}
+.pp-alert-info {
+  background-color: var(--pp-info-50);
+  border-left-color: var(--pp-info-500);
+  color: #1E40AF;
+}
+
+/* ===================================================================
+   9. PROGRESS BAR
+   =================================================================== */
+.pp-progress {
+  width: 100%;
+  height: 0.5rem;
+  background-color: var(--pp-neutral-200);
+  border-radius: var(--pp-radius-full);
+  overflow: hidden;
+}
+.pp-progress-bar {
+  height: 100%;
+  background-color: var(--pp-primary-600);
+  border-radius: var(--pp-radius-full);
+  transition: width var(--pp-transition-slow);
+}
+
+/* ===================================================================
+   10. TABLES
+   =================================================================== */
+.pp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.pp-table th {
+  padding: var(--pp-space-3) var(--pp-space-4);
+  font-size: var(--pp-text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pp-neutral-500);
+  background-color: var(--pp-neutral-50);
+  text-align: left;
+  border-bottom: 1px solid var(--pp-neutral-200);
+}
+.pp-table td {
+  padding: var(--pp-space-4);
+  font-size: var(--pp-text-sm);
+  color: var(--pp-neutral-600);
+  border-bottom: 1px solid var(--pp-neutral-100);
+}
+.pp-table tr:hover td {
+  background-color: var(--pp-neutral-50);
+}
+
+/* ===================================================================
+   11. MODAL / DIALOG
+   =================================================================== */
+.pp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.pp-modal {
+  background: #fff;
+  border-radius: var(--pp-radius-xl);
+  box-shadow: var(--pp-shadow-xl);
+  width: 100%;
+  max-width: 28rem;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.pp-modal-header {
+  padding: var(--pp-space-6);
+  border-bottom: 1px solid var(--pp-neutral-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pp-modal-body {
+  padding: var(--pp-space-6);
+}
+.pp-modal-footer {
+  padding: var(--pp-space-4) var(--pp-space-6);
+  border-top: 1px solid var(--pp-neutral-200);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--pp-space-3);
+}
+
+/* ===================================================================
+   12. DIVIDER
+   =================================================================== */
+.pp-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--pp-neutral-200);
+  margin: var(--pp-space-6) 0;
+}
+.pp-divider-label {
+  display: flex;
+  align-items: center;
+  gap: var(--pp-space-4);
+  color: var(--pp-neutral-400);
+  font-size: var(--pp-text-sm);
+}
+.pp-divider-label::before,
+.pp-divider-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--pp-neutral-200);
+}
+
+/* ===================================================================
+   13. FILE UPLOAD (Dropzone)
+   =================================================================== */
+.pp-dropzone {
+  border: 2px dashed var(--pp-neutral-300);
+  border-radius: var(--pp-radius-xl);
+  padding: var(--pp-space-8);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--pp-transition-base), background-color var(--pp-transition-base);
+}
+.pp-dropzone:hover {
+  border-color: var(--pp-primary-400);
+  background-color: var(--pp-primary-50);
+}
+.pp-dropzone.has-file {
+  border-color: var(--pp-primary-500);
+  background-color: var(--pp-primary-50);
+}
+
+/* ===================================================================
+   14. TOOLTIP HINT
+   =================================================================== */
+.pp-hint {
+  font-size: var(--pp-text-xs);
+  color: var(--pp-neutral-400);
+  margin-top: var(--pp-space-1);
+}
+
+/* ===================================================================
+   15. EMPTY STATE
+   =================================================================== */
+.pp-empty {
+  padding: var(--pp-space-16) var(--pp-space-6);
+  text-align: center;
+  color: var(--pp-neutral-400);
+}
+.pp-empty-icon {
+  margin: 0 auto var(--pp-space-4);
+  color: var(--pp-neutral-300);
+}
+.pp-empty-title {
+  font-size: var(--pp-text-lg);
+  font-weight: 600;
+  color: var(--pp-neutral-500);
+  margin-bottom: var(--pp-space-2);
+}
+.pp-empty-action {
+  margin-top: var(--pp-space-6);
+}
+
+/* ===================================================================
+   16. UTILITY HELPERS
+   =================================================================== */
+.pp-text-muted { color: var(--pp-neutral-400); }
+.pp-text-secondary { color: var(--pp-neutral-500); }
+.pp-text-primary { color: var(--pp-primary-600); }
+.pp-text-success { color: var(--pp-success-500); }
+.pp-text-warning { color: var(--pp-warning-500); }
+.pp-text-error { color: var(--pp-error-500); }
+
+.pp-bg-primary { background-color: var(--pp-primary-50); }
+.pp-bg-success { background-color: var(--pp-success-50); }
+.pp-bg-warning { background-color: var(--pp-warning-50); }
+.pp-bg-error { background-color: var(--pp-error-50); }
+.pp-bg-info { background-color: var(--pp-info-50); }
+
+.pp-flex-center { display: flex; align-items: center; justify-content: center; }
+.pp-flex-between { display: flex; align-items: center; justify-content: space-between; }
+.pp-flex-gap-2 { display: flex; gap: var(--pp-space-2); align-items: center; }
+.pp-flex-gap-3 { display: flex; gap: var(--pp-space-3); align-items: center; }
+.pp-flex-gap-4 { display: flex; gap: var(--pp-space-4); align-items: center; }
+
+.pp-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pp-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+/* ===================================================================
+   17. GRID / LAYOUT
+   =================================================================== */
+.pp-container {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--pp-space-6);
+  padding-right: var(--pp-space-6);
+}
+
+.pp-grid {
+  display: grid;
+  gap: var(--pp-space-6);
+}
+.pp-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.pp-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.pp-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.pp-grid-sidebar { grid-template-columns: 1fr 320px; }
+.pp-grid-sidebar-wide { grid-template-columns: 2fr 1fr; }
+
+.pp-section {
+  padding-top: var(--pp-space-16);
+  padding-bottom: var(--pp-space-16);
+}
+
+/* Responsive breakpoints for grid */
+@media (max-width: 768px) {
+  .pp-grid-2,
+  .pp-grid-3,
+  .pp-grid-4,
+  .pp-grid-sidebar,
+  .pp-grid-sidebar-wide {
+    grid-template-columns: 1fr;
+  }
+  .pp-container {
+    padding-left: var(--pp-space-4);
+    padding-right: var(--pp-space-4);
+  }
+  .pp-heading-1 { font-size: var(--pp-text-3xl); }
+  .pp-heading-2 { font-size: var(--pp-text-2xl); }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .pp-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .pp-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}

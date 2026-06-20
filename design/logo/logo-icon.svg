@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background shield shape -->
+  <defs>
+    <linearGradient id="shieldGrad" x1="40" y1="20" x2="160" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#3730A3"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="60" y1="60" x2="140" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shield -->
+  <path d="M100 12 L180 52 L180 100 C180 146 148 178 100 192 C52 178 20 146 20 100 L20 52 Z"
+        fill="url(#shieldGrad)" stroke="#312E81" stroke-width="3"/>
+
+  <!-- Hammer icon inside shield -->
+  <g transform="translate(100, 95)">
+    <!-- Hammer handle -->
+    <rect x="-4" y="10" width="8" height="50" rx="3" fill="#C7D2FE" />
+    <!-- Hammer head -->
+    <path d="M-24 10 L24 10 L28 18 L-28 18 Z" fill="#E0E7FF" stroke="#A5B4FC" stroke-width="1.5"/>
+    <!-- Hammer left claw -->
+    <path d="M-24 10 L-30 0 L-24 18" fill="#E0E7FF" stroke="#A5B4FC" stroke-width="1.5"/>
+    <!-- Hammer right claw -->
+    <path d="M24 10 L30 0 L24 18" fill="#E0E7FF" stroke="#A5B4FC" stroke-width="1.5"/>
+  </g>
+
+  <!-- Checkmark overlay -->
+  <circle cx="140" cy="60" r="18" fill="#10B981" stroke="#FFF" stroke-width="3"/>
+  <path d="M132 60 L138 67 L149 53" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Compass/direction dot in shield top -->
+  <circle cx="100" cy="50" r="6" fill="#818CF8" opacity="0.6"/>
+  <circle cx="100" cy="50" r="2.5" fill="#C7D2FE"/>
+</svg>

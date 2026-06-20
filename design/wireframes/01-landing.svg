@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" fill="#F8FAFC"/>
+  <text x="60" y="50" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#94A3B8" letter-spacing="2">WIREFRAME — LANDING PAGE</text>
+
+  <!-- Navbar -->
+  <rect x="0" y="60" width="1200" height="60" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="40" y="75" width="36" height="30" rx="6" fill="#4F46E5"/>
+  <rect x="85" y="78" width="80" height="8" rx="4" fill="#1E293B"/>
+  <rect x="85" y="92" width="60" height="6" rx="3" fill="#64748B"/>
+
+  <!-- Nav links -->
+  <rect x="250" y="82" width="50" height="6" rx="3" fill="#475569"/>
+  <rect x="320" y="82" width="65" height="6" rx="3" fill="#475569"/>
+  <rect x="405" y="82" width="80" height="6" rx="3" fill="#475569"/>
+
+  <!-- Nav right: Sign In + Register -->
+  <rect x="900" y="78" width="60" height="24" rx="6" stroke="#CBD5E1" stroke-width="1.5" fill="none"/>
+  <text x="915" y="94" font-family="Inter, sans-serif" font-size="11" fill="#475569" font-weight="600">Sign In</text>
+  <rect x="980" y="78" width="80" height="24" rx="6" fill="#4F46E5"/>
+  <text x="995" y="94" font-family="Inter, sans-serif" font-size="11" fill="#fff" font-weight="600">Register Free</text>
+
+  <!-- Hero Section -->
+  <rect x="0" y="120" width="1200" height="380" fill="url(#heroGrad)" />
+  <defs>
+    <linearGradient id="heroGrad" x1="0" y1="0" x2="1200" y2="380">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Hero badge -->
+  <rect x="80" y="170" width="160" height="26" rx="13" fill="rgba(99,102,241,0.3)" stroke="rgba(165,180,252,0.3)" stroke-width="1"/>
+  <text x="96" y="187" font-family="Inter, sans-serif" font-size="11" fill="#A5B4FC" font-weight="600">★ AI-Powered Permit Nav</text>
+
+  <!-- Hero heading -->
+  <text x="80" y="240" font-family="Inter, sans-serif" font-size="42" font-weight="900" fill="#fff">Permits Simplified.</text>
+  <text x="80" y="290" font-family="Inter, sans-serif" font-size="42" font-weight="900" fill="#C7D2FE">Projects Approved.</text>
+
+  <!-- Hero subtext -->
+  <text x="80" y="330" font-family="Inter, sans-serif" font-size="14" fill="#94A3B8" max-width="600">Describe your project once. PermitPilot determines the exact permits, forms, fees,</text>
+  <text x="80" y="350" font-family="Inter, sans-serif" font-size="14" fill="#94A3B8">inspections, and timelines needed — tailored to your location.</text>
+
+  <!-- CTA buttons -->
+  <rect x="80" y="380" width="180" height="40" rx="8" fill="#4F46E5"/>
+  <text x="120" y="405" font-family="Inter, sans-serif" font-size="13" fill="#fff" font-weight="600">→  Start Intake Wizard</text>
+  <rect x="280" y="380" width="150" height="40" rx="8" fill="#334155" stroke="#475569" stroke-width="1"/>
+  <text x="310" y="405" font-family="Inter, sans-serif" font-size="13" fill="#E2E8F0" font-weight="600">View Pricing Plans</text>
+
+  <!-- Hero right: feature card -->
+  <rect x="680" y="170" width="440" height="280" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <text x="710" y="205" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="#fff">✓  Why Choose PermitPilot?</text>
+  
+  <rect x="710" y="230" width="380" height="55" rx="8" fill="none"/>
+  <rect x="710" y="235" width="28" height="28" rx="6" fill="rgba(99,102,241,0.2)"/>
+  <text x="745" y="250" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#fff">Location-Tailored Logic</text>
+  <text x="745" y="268" font-family="Inter, sans-serif" font-size="11" fill="#CBD5E1">Intelligent rules adjusted to your specific municipality.</text>
+
+  <rect x="710" y="295" width="380" height="55" rx="8" fill="none"/>
+  <rect x="710" y="300" width="28" height="28" rx="6" fill="rgba(99,102,241,0.2)"/>
+  <text x="745" y="315" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#fff">Prepped Applications & Checklists</text>
+  <text x="745" y="333" font-family="Inter, sans-serif" font-size="11" fill="#CBD5E1">Get pre-filled forms and ready-to-use permit checklists.</text>
+
+  <rect x="710" y="360" width="380" height="55" rx="8" fill="none"/>
+  <rect x="710" y="365" width="28" height="28" rx="6" fill="rgba(99,102,241,0.2)"/>
+  <text x="745" y="380" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#fff">Inspection Tracking</text>
+  <text x="745" y="398" font-family="Inter, sans-serif" font-size="11" fill="#CBD5E1">Scheduling, reminders, and milestone tracking dashboard.</text>
+
+  <!-- Target Audiences Section -->
+  <rect x="40" y="540" width="1120" height="160" fill="#fff"/>
+  <text x="480" y="575" font-family="Inter, sans-serif" font-size="22" font-weight="800" fill="#1E293B">Built for Creators &amp; Builders</text>
+
+  <!-- 4 audience cards -->
+  <rect x="80" y="600" width="240" height="80" rx="10" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="95" y="612" width="32" height="32" rx="8" fill="#EFF6FF"/>
+  <text x="140" y="633" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Homeowners</text>
+  <text x="95" y="660" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Decks, pools, garages, workshops...</text>
+
+  <rect x="340" y="600" width="240" height="80" rx="10" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="355" y="612" width="32" height="32" rx="8" fill="#EEF2FF"/>
+  <text x="400" y="633" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Contractors</text>
+  <text x="355" y="660" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Multi-project, multi-jurisdiction</text>
+
+  <rect x="600" y="600" width="240" height="80" rx="10" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="615" y="612" width="32" height="32" rx="8" fill="#ECFDF5"/>
+  <text x="660" y="633" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Property Managers</text>
+  <text x="615" y="660" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Multi-family, maintenance tracking</text>
+
+  <rect x="860" y="600" width="240" height="80" rx="10" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="875" y="612" width="32" height="32" rx="8" fill="#FAF5FF"/>
+  <text x="920" y="633" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Small Developers</text>
+  <text x="875" y="660" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Build-outs, permits, occupancy</text>
+
+  <!-- Pricing Section -->
+  <rect x="0" y="720" width="1200" height="180" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="460" y="755" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#1E293B">Flexible Pricing Tailored To You</text>
+
+  <!-- 3 pricing cards -->
+  <rect x="80" y="780" width="300" height="100" rx="10" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="100" y="800" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#64748B" letter-spacing="1">ONE-OFF BUILDER</text>
+  <text x="100" y="820" font-family="Inter, sans-serif" font-size="18" font-weight="800" fill="#1E293B">$49 - $149</text>
+  <text x="185" y="820" font-family="Inter, sans-serif" font-size="11" fill="#64748B">/ project</text>
+  <text x="100" y="845" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Single-use permit package</text>
+  <rect x="100" y="860" width="260" height="0" stroke="#E2E8F0" stroke-width="1"/>
+
+  <rect x="420" y="770" width="340" height="110" rx="10" fill="#312E81" stroke="#4F46E5" stroke-width="2" transform="scale(1.02)"/>
+  <rect x="530" y="762" width="100" height="18" rx="9" fill="#F59E0B"/>
+  <text x="548" y="775" font-family="Inter, sans-serif" font-size="8" font-weight="800" fill="#1E293B">MOST POPULAR</text>
+  <text x="440" y="798" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#A5B4FC" letter-spacing="1">HOMEOWNER / DIY</text>
+  <text x="440" y="818" font-family="Inter, sans-serif" font-size="18" font-weight="800" fill="#fff">$19 - $49</text>
+  <text x="540" y="818" font-family="Inter, sans-serif" font-size="11" fill="#A5B4FC">/ mo</text>
+  <text x="440" y="845" font-family="Inter, sans-serif" font-size="10" fill="#C7D2FE">Unlimited projects, AI engine</text>
+
+  <rect x="800" y="780" width="300" height="100" rx="10" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="820" y="800" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#64748B" letter-spacing="1">PRO BUILDER</text>
+  <text x="820" y="820" font-family="Inter, sans-serif" font-size="18" font-weight="800" fill="#1E293B">$79 - $199</text>
+  <text x="920" y="820" font-family="Inter, sans-serif" font-size="11" fill="#64748B">/ mo</text>
+  <text x="820" y="845" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Team collaboration seats</text>
+</svg>

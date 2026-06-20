@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 750" fill="none">
+  <rect width="1100" height="750" fill="#F8FAFC"/>
+  <text x="60" y="40" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#94A3B8" letter-spacing="2">WIREFRAME — PROJECT DETAIL / PERMIT CHECKLIST + DOCUMENT UPLOAD</text>
+
+  <!-- Back link -->
+  <text x="60" y="75" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#4F46E5">←  Back to Dashboard</text>
+
+  <!-- Project Title -->
+  <text x="60" y="115" font-family="Inter, sans-serif" font-size="26" font-weight="800" fill="#1E293B">New Back Deck Renovation</text>
+  <text x="60" y="138" font-family="Inter, sans-serif" font-size="12" fill="#64748B">Project Class: <tspan font-weight="700">Deck</tspan>  •  Location: <tspan font-weight="700">Austin, TX 78701</tspan></text>
+
+  <!-- Cost summary -->
+  <rect x="800" y="105" width="240" height="40" rx="8" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="815" y="123" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Total Cost Estimates:</text>
+  <text x="815" y="140" font-family="Inter, sans-serif" font-size="18" font-weight="800" fill="#1E293B">$265</text>
+
+  <!-- Main grid -->
+  <!-- LEFT COLUMN: Permits Checklist -->
+  <rect x="60" y="165" width="660" height="540" rx="12" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  
+  <!-- Section header -->
+  <rect x="60" y="165" width="660" height="45" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="85" y="193" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#1E293B">AI Permit Path Checklist</text>
+  <rect x="580" y="180" width="115" height="18" rx="9" fill="#EEF2FF"/>
+  <text x="588" y="193" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="#4F46E5" letter-spacing="0.5">⟳  Synced to Municipal Code</text>
+
+  <!-- Permit 1 -->
+  <rect x="60" y="211" width="660" height="105" fill="#fff" stroke="#E2E8F0" stroke-width="0.5"/>
+  <circle cx="85" cy="240" r="8" fill="#A7F3D0"/>
+  <text x="100" y="244" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Deck Structural Building Permit</text>
+  <rect x="590" y="233" width="100" height="20" rx="10" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+  <text x="602" y="247" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#065F46">Under Review</text>
+  <text x="85" y="270" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Main municipal permit validating code compliance, setback requirements, and general engineering safety.</text>
+  <text x="85" y="295" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">Fee: $120</text>
+  <text x="220" y="295" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">Timeline: 14-21 Business Days</text>
+
+  <!-- Permit 2 -->
+  <rect x="60" y="316" width="660" height="105" fill="#fff" stroke="#E2E8F0" stroke-width="0.5"/>
+  <circle cx="85" cy="345" r="8" fill="#E2E8F0"/>
+  <text x="100" y="349" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Deck Electrical Plan &amp; Permit</text>
+  <rect x="590" y="338" width="80" height="20" rx="10" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1"/>
+  <text x="600" y="352" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#92400E">Pending</text>
+  <text x="85" y="375" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Required for any secondary wiring runs, external outlets, pumps, or subpanel additions.</text>
+  <text x="85" y="400" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">Fee: $95</text>
+  <text x="220" y="400" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">Timeline: 5-7 Business Days</text>
+
+  <!-- Permit 3 -->
+  <rect x="60" y="421" width="660" height="105" fill="#fff" stroke="#E2E8F0" stroke-width="0.5"/>
+  <circle cx="85" cy="450" r="8" fill="#A7F3D0"/>
+  <text x="100" y="454" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Zoning &amp; Setback Verification Review</text>
+  <rect x="600" y="443" width="90" height="20" rx="10" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+  <text x="615" y="457" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#065F46">Approved</text>
+  <text x="85" y="480" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Ensures the accessory structure meets property boundary setback limits.</text>
+  <text x="85" y="505" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">Fee: $50</text>
+  <text x="220" y="505" font-family="Inter, sans-serif" font-size="10" fill="#94A3B8">Timeline: Approved</text>
+
+  <!-- Inspections section -->
+  <rect x="60" y="526" width="660" height="180" fill="#fff" stroke="#E2E8F0" stroke-width="0.5"/>
+  <rect x="60" y="526" width="660" height="40" fill="#F8FAFC"/>
+  <text x="85" y="552" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#1E293B">Required Inspections Calendar</text>
+  
+  <circle cx="85" cy="588" r="10" fill="#10B981"/>
+  <text x="105" y="592" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#1E293B">Setback &amp; Footing Layout Inspection</text>
+  <rect x="310" y="580" width="55" height="18" rx="9" fill="#ECFDF5"/>
+  <text x="318" y="593" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#065F46">Passed</text>
+  <text x="105" y="612" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Setbacks measured: 6.2ft West, 5.8ft South. Approved.</text>
+
+  <circle cx="85" cy="638" r="10" fill="#6366F1"/>
+  <text x="105" y="642" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#1E293B">Rough Frame &amp; Electrical Inspection</text>
+  <rect x="340" y="630" width="65" height="18" rx="9" fill="#E0E7FF"/>
+  <text x="350" y="643" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#4338CA">Scheduled</text>
+  <text x="105" y="662" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Pre-drywall inspection: framing ties, sheers, conduits.</text>
+
+  <circle cx="85" cy="688" r="10" fill="#94A3B8"/>
+  <text x="105" y="692" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#1E293B">Final Building &amp; Safety Signoff</text>
+  <rect x="325" y="680" width="55" height="18" rx="9" fill="#F1F5F9"/>
+  <text x="332" y="693" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#64748B">Required</text>
+
+  <!-- RIGHT COLUMN: File Upload -->
+  <rect x="755" y="165" width="280" height="300" rx="12" fill="#fff" stroke="#E2E8F0" stroke-width="1"/>
+  
+  <rect x="755" y="165" width="280" height="45" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="780" y="193" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1E293B">📄 Project Document Box</text>
+
+  <!-- Dropzone -->
+  <rect x="775" y="225" width="240" height="100" rx="10" fill="#fff" stroke="#CBD5E1" stroke-dasharray="6,4" stroke-width="2"/>
+  <text x="870" y="260" font-family="Inter, sans-serif" font-size="11" fill="#64748B">📤</text>
+  <text x="810" y="285" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#475569">Choose a file to upload</text>
+  <text x="800" y="305" font-family="Inter, sans-serif" font-size="9" fill="#94A3B8">PDF, PNG, JPG, or CAD up to 10MB</text>
+
+  <!-- Upload button -->
+  <rect x="775" y="340" width="240" height="34" rx="6" fill="#4F46E5"/>
+  <text x="845" y="361" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#fff">Save File to Project</text>
+
+  <!-- Files list -->
+  <text x="780" y="395" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#64748B" letter-spacing="1">STORED FILES (2)</text>
+
+  <rect x="775" y="408" width="240" height="38" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="790" y="425" font-family="Inter, sans-serif" font-size="10" fill="#475569">📄 property_site_layout.pdf</text>
+  <text x="790" y="438" font-family="Inter, sans-serif" font-size="8" fill="#94A3B8">1.4 MB • 2026-06-01</text>
+
+  <rect x="775" y="450" width="240" height="38" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="790" y="467" font-family="Inter, sans-serif" font-size="10" fill="#475569">📄 structural_joist_drawings.dwg</text>
+  <text x="790" y="480" font-family="Inter, sans-serif" font-size="8" fill="#94A3B8">4.8 MB • 2026-06-02</text>
+
+  <!-- AI Advisory -->
+  <rect x="755" y="490" width="280" height="90" rx="10" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1"/>
+  <text x="775" y="515" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#92400E">⚠  AI Advisory Notice</text>
+  <text x="775" y="535" font-family="Inter, sans-serif" font-size="9" fill="#92400E">Permit requirements can change based on tree preservation, septic proximity, and historic district overlays.</text>
+  <text x="775" y="555" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#92400E">Review all uploaded site plans with an inspector.</text>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" fill="none">
+  <rect width="600" height="700" fill="#F8FAFC"/>
+  <text x="60" y="40" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#94A3B8" letter-spacing="2">WIREFRAME — SIGNUP PAGE</text>
+
+  <!-- Logo -->
+  <rect x="260" y="70" width="28" height="22" rx="4" fill="#4F46E5"/>
+  <rect x="293" y="73" width="60" height="5" rx="2" fill="#1E293B"/>
+  <rect x="293" y="83" width="45" height="4" rx="2" fill="#64748B"/>
+
+  <!-- Title -->
+  <text x="190" y="140" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#1E293B">Create your account</text>
+  <text x="155" y="162" font-family="Inter, sans-serif" font-size="13" fill="#64748B">Or  
+    <tspan fill="#4F46E5" font-weight="600" text-decoration="underline">sign in to existing account</tspan></text>
+
+  <!-- Card -->
+  <rect x="100" y="190" width="400" height="440" rx="12" fill="#fff" stroke="#E2E8F0" stroke-width="1" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))"/>
+
+  <!-- Name -->
+  <rect x="125" y="218" width="14" height="14" rx="3" fill="#94A3B8"/>
+  <text x="125" y="250" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#475569">Full Name</text>
+  <rect x="125" y="258" width="350" height="34" rx="6" fill="#fff" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="140" y="279" font-family="Inter, sans-serif" font-size="11" fill="#94A3B8">Jane Doe</text>
+
+  <!-- Email -->
+  <rect x="125" y="310" width="14" height="14" rx="3" fill="#94A3B8"/>
+  <text x="125" y="342" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#475569">Email address</text>
+  <rect x="125" y="350" width="350" height="34" rx="6" fill="#fff" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="140" y="371" font-family="Inter, sans-serif" font-size="11" fill="#94A3B8">you@example.com</text>
+
+  <!-- Password -->
+  <rect x="125" y="402" width="14" height="14" rx="3" fill="#94A3B8"/>
+  <text x="125" y="434" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#475569">Password</text>
+  <rect x="125" y="442" width="350" height="34" rx="6" fill="#fff" stroke="#CBD5E1" stroke-width="1.5"/>
+  <circle cx="140" cy="459" r="3" fill="#94A3B8"/>
+  <circle cx="150" cy="459" r="3" fill="#94A3B8"/>
+  <circle cx="160" cy="459" r="3" fill="#94A3B8"/>
+  <circle cx="170" cy="459" r="3" fill="#94A3B8"/>
+
+  <!-- Checkbox -->
+  <rect x="125" y="495" width="14" height="14" rx="3" fill="#fff" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="148" y="507" font-family="Inter, sans-serif" font-size="11" fill="#475569">I agree to the  
+    <tspan fill="#4F46E5" text-decoration="underline">Terms of Service</tspan> and  
+    <tspan fill="#4F46E5" text-decoration="underline">Privacy Policy</tspan></text>
+
+  <!-- Submit button -->
+  <rect x="125" y="530" width="350" height="40" rx="8" fill="#4F46E5"/>
+  <text x="255" y="555" font-family="Inter, sans-serif" font-size="13" fill="#fff" font-weight="600">+  Register</text>
+
+  <!-- Footer -->
+  <rect x="125" y="585" width="350" height="1" fill="#E2E8F0"/>
+  <text x="230" y="600" font-family="Inter, sans-serif" font-size="11" fill="#64748B">Security Assured</text>
+  <circle cx="170" cy="620" r="6" fill="#10B981"/>
+  <text x="185" y="624" font-family="Inter, sans-serif" font-size="10" fill="#64748B">No Credit Card Required</text>
+  <circle cx="340" cy="620" r="6" fill="#10B981"/>
+  <text x="355" y="624" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Instant Guide Setup</text>
+</svg>
