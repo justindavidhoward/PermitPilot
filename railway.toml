@@ -1,6 +1,5 @@
 [build]
 builder = "nixpacks"
-rootDirectory = "backend"
 buildCommand = "npm run build"
 
 [deploy]
