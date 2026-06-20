@@ -142,20 +142,6 @@ export default function Login() {
               </button>
             </div>
           </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-slate-500">Demo Mode Access</span>
-              </div>
-            </div>
-            <div className="mt-4 text-xs text-slate-500 text-center">
-              Type any email and password to log in instantly.
-            </div>
-          </div>
         </div>
       </div>
     </div>

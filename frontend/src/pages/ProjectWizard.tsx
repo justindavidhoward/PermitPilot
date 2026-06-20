@@ -55,7 +55,7 @@ export default function ProjectWizard() {
       await apiClient.post(`/projects/${id}/determine-permits`);
 
       setIsLoading(false);
-      navigate('/dashboard');
+      navigate(`/project-detail/${id}`);
     } catch (err: any) {
       console.error('Error in project wizard submit:', err);
       setIsLoading(false);
