@@ -14,7 +14,8 @@ const app = express();
 const port = parseInt(process.env.PORT || '3000');
 
 // Run migrations if DATABASE_URL is set
-if (process.env.DATABASE_URL) {
+const dbUrl = process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL || '';
+if (dbUrl) {
   runMigrations().catch(err => {
     console.error('Failed to run migrations:', err);
   });

@@ -81,7 +81,8 @@ export async function runMigrations() {
     console.error('Migration error:', error.message);
     // Don't throw if we're not using Postgres, as these SQL statements might fail on team-db
     // but the task says "run on startup IF using PostgreSQL"
-    if (process.env.DATABASE_URL) {
+    const dbUrl = process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL || '';
+    if (dbUrl) {
        throw error;
     }
   }

@@ -7,12 +7,13 @@ dotenv.config();
 
 const execPromise = promisify(exec);
 
-const isPostgres = !!process.env.DATABASE_URL;
+const dbUrl = process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL || '';
+const isPostgres = !!dbUrl;
 let pool: Pool | null = null;
 
 if (isPostgres) {
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: dbUrl,
     ssl: {
       rejectUnauthorized: false
     }
