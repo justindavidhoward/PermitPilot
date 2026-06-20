@@ -5,11 +5,20 @@ import authRoutes from './routes/auth';
 import projectRoutes from './routes/projects';
 import paymentRoutes from './routes/payments';
 import webhookRoutes from './routes/webhooks';
+import path from 'path';
+import { runMigrations } from './migrate';
 
 dotenv.config();
 
 const app = express();
 const port = parseInt(process.env.PORT || '3000');
+
+// Run migrations if DATABASE_URL is set
+if (process.env.DATABASE_URL) {
+  runMigrations().catch(err => {
+    console.error('Failed to run migrations:', err);
+  });
+}
 
 // Middleware
 app.use(cors());
@@ -36,7 +45,6 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/stripe/webhook', webhookRoutes);
 
 // Serve static files from the React frontend app
-import path from 'path';
 const frontendDistPath = '/home/team/shared/frontend/dist';
 app.use(express.static(frontendDistPath));
 

@@ -1,0 +1,4 @@
+nohup: ignoring input
+◇ injected env (5) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+PermitPilot API server listening on http://0.0.0.0:3000
