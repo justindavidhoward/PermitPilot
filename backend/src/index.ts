@@ -7,15 +7,21 @@ import paymentRoutes from './routes/payments';
 import webhookRoutes from './routes/webhooks';
 import path from 'path';
 import { runMigrations } from './migrate';
+import { initDb } from './db';
 
 dotenv.config();
 
 const app = express();
 const port = parseInt(process.env.PORT || '3000');
 
-// Run database migrations
-runMigrations().catch(err => {
-  console.error('Failed to run migrations:', err);
+// Initialize database and run migrations
+async function start() {
+  await initDb();
+  await runMigrations();
+}
+
+start().catch(err => {
+  console.error('Failed to initialize:', err);
 });
 
 // Middleware

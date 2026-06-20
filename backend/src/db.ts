@@ -1,33 +1,75 @@
-import Database from 'better-sqlite3';
-import path from 'path';
+import initSqlJs, { Database as SqlJsDatabase } from 'sql.js';
 import fs from 'fs';
+import path from 'path';
 
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+const DB_PATH = path.join(DATA_DIR, 'permitpilot.db');
+
+let db: SqlJsDatabase | null = null;
+
+export async function initDb(): Promise<void> {
+  if (db) return;
+
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+
+  const SQL = await initSqlJs();
+
+  // Load existing database or create new one
+  if (fs.existsSync(DB_PATH)) {
+    const buffer = fs.readFileSync(DB_PATH);
+    db = new SQL.Database(buffer);
+  } else {
+    db = new SQL.Database();
+  }
+
+  // Enable WAL mode and foreign keys
+  db.run('PRAGMA foreign_keys = ON;');
+  db.run('PRAGMA journal_mode = WAL;');
+
+  console.log('SQLite database initialized at:', DB_PATH);
 }
 
-const DB_PATH = path.join(DATA_DIR, 'permitpilot.db');
-const db = new Database(DB_PATH);
-
-// Enable WAL mode for better concurrent access
-db.pragma('journal_mode = WAL');
-db.pragma('foreign_keys = ON');
-
-export function getDatabase() {
-  return db;
+function saveDb() {
+  if (!db) return;
+  const data = db.export();
+  const buffer = Buffer.from(data);
+  fs.writeFileSync(DB_PATH, buffer);
 }
 
 export function query<T = any>(sql: string, params: any[] = []): T {
+  if (!db) {
+    throw new Error('Database not initialized. Call initDb() first.');
+  }
+
   try {
     const trimmed = sql.trim().toUpperCase();
-    if (trimmed.startsWith('SELECT') || trimmed.startsWith('WITH')) {
-      const stmt = db.prepare(sql);
-      return (params.length > 0 ? stmt.all(...params) : stmt.all()) as T;
+    const isSelect = trimmed.startsWith('SELECT') || trimmed.startsWith('WITH');
+    const isInsert = trimmed.startsWith('INSERT');
+
+    if (isSelect || trimmed.startsWith('PRAGMA')) {
+      // For SELECT queries, use exec and parse results
+      const results = db.exec(sql);
+      if (results.length === 0) return [] as any;
+      return results[0].values.map((row: any[]) => {
+        const obj: any = {};
+        results[0].columns.forEach((col: string, i: number) => {
+          obj[col] = row[i];
+        });
+        return obj;
+      }) as any;
     } else {
-      const stmt = db.prepare(sql);
-      const result = params.length > 0 ? stmt.run(...params) : stmt.run();
-      return result as any;
+      // For INSERT/UPDATE/DELETE, use run
+      db.run(sql, params);
+      saveDb();
+
+      if (isInsert) {
+        // Get the last insert id
+        const result = db.exec('SELECT last_insert_rowid() as id');
+        return { changes: db.getRowsModified(), lastInsertRowid: result[0]?.values[0]?.[0] } as any;
+      }
+      return { changes: db.getRowsModified() } as any;
     }
   } catch (error: any) {
     console.error('SQLite query error:', error.message);
@@ -40,5 +82,9 @@ export function getDatabaseUrl(): string {
 }
 
 export function close() {
-  db.close();
+  if (db) {
+    saveDb();
+    db.close();
+    db = null;
+  }
 }
