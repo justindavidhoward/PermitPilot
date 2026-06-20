@@ -2,6 +2,9 @@
   "name": "permitpilot",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "build": "npm --prefix frontend install && npm --prefix frontend run build && npm --prefix backend install && npm --prefix backend run build",
     "start": "cd backend && node dist/index.js"
