@@ -7,14 +7,15 @@ import paymentRoutes from './routes/payments';
 import webhookRoutes from './routes/webhooks';
 import path from 'path';
 import { runMigrations } from './migrate';
+import { getDatabaseUrl } from './db';
 
 dotenv.config();
 
 const app = express();
 const port = parseInt(process.env.PORT || '3000');
 
-// Run migrations if DATABASE_URL is set
-const dbUrl = process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL || '';
+// Run migrations if a database URL is available
+const dbUrl = getDatabaseUrl();
 if (dbUrl) {
   runMigrations().catch(err => {
     console.error('Failed to run migrations:', err);

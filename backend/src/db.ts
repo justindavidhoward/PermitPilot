@@ -7,17 +7,36 @@ dotenv.config();
 
 const execPromise = promisify(exec);
 
+// Detect PostgreSQL connection: check various env var formats (Railway, standard, etc.)
 const dbUrl = process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL || '';
-const isPostgres = !!dbUrl;
+
+// Fallback: construct from individual Railway PostgreSQL variables
+const pgHost = process.env.PGHOST || process.env.RAILWAY_PRIVATE_DOMAIN || process.env.RAILWAY_TCP_PROXY_DOMAIN || '';
+const pgPort = process.env.PGPORT || process.env.RAILWAY_TCP_PROXY_PORT || '5432';
+const pgUser = process.env.PGUSER || '';
+const pgPass = process.env.POSTGRES_PASSWORD || process.env.PGPASSWORD || '';
+const pgDb = process.env.PGDATABASE || process.env.PGNAME || '';
+
+const constructedUrl = (pgHost && pgUser && pgPass && pgDb)
+  ? `postgresql://${pgUser}:${pgPass}@${pgHost}:${pgPort}/${pgDb}`
+  : '';
+
+const finalDbUrl = dbUrl || constructedUrl;
+const isPostgres = !!finalDbUrl;
 let pool: Pool | null = null;
 
 if (isPostgres) {
+  console.log('Connecting to PostgreSQL at:', pgHost || 'via URL');
   pool = new Pool({
-    connectionString: dbUrl,
+    connectionString: finalDbUrl,
     ssl: {
       rejectUnauthorized: false
     }
   });
+}
+
+export function getDatabaseUrl(): string {
+  return finalDbUrl;
 }
 
 export async function query<T = any>(sql: string, params: any[] = []): Promise<T> {
