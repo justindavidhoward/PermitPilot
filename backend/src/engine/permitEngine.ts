@@ -24,6 +24,7 @@ export async function determinePermits(details: ProjectDetails): Promise<PermitR
   const state = details.location_state.toUpperCase();
   console.log('Detected state:', state);
   const type = details.project_type.toLowerCase();
+  const scope = (details.project_scope + ' ' + (details.property_details || '')).toLowerCase();
   
   // Base Rule-based engine with state variations
   if (type.includes('deck')) {
@@ -76,15 +77,18 @@ export async function determinePermits(details: ProjectDetails): Promise<PermitR
       issuing_department: dept
     });
 
-    permits.push({
-      name: 'Electrical Permit',
-      description: 'Required for new electrical circuits in the garage.',
-      forms_needed: ['Electrical Permit Application'],
-      fees: state === 'CA' ? 150 : 75,
-      estimated_timeline: state === 'TX' ? '2 business days' : '3-5 business days',
-      required_inspections: ['Rough-in', 'Final'],
-      issuing_department: 'Electrical Division'
-    });
+    // Garages almost always need electrical if not specified, but let's be explicit
+    if (!scope.includes('no electric')) {
+      permits.push({
+        name: 'Electrical Permit',
+        description: 'Required for new electrical circuits in the garage.',
+        forms_needed: ['Electrical Permit Application'],
+        fees: state === 'CA' ? 150 : 75,
+        estimated_timeline: state === 'TX' ? '2 business days' : '3-5 business days',
+        required_inspections: ['Rough-in', 'Final'],
+        issuing_department: 'Electrical Division'
+      });
+    }
   } else if (type.includes('pool')) {
     let fee = 250;
     let timeline = '7-14 business days';
@@ -140,10 +144,10 @@ export async function determinePermits(details: ProjectDetails): Promise<PermitR
       required_inspections: ['Framing', 'Electrical Rough-in', 'Plumbing Rough-in', 'Mechanical Rough-in', 'Insulation', 'Final'],
       issuing_department: dept
     });
-  } else if (type.includes('workshop') || type.includes('shed')) {
+  } else if (type.includes('workshop') || type.includes('shed') || type.includes('cabin')) {
     permits.push({
       name: 'Accessory Structure Permit',
-      description: 'Required for sheds or workshops over 200 sq ft.',
+      description: 'Required for sheds, workshops, or cabins over 200 sq ft or with utilities.',
       forms_needed: ['Building Permit Application', 'Site Plan'],
       fees: 120,
       estimated_timeline: state === 'TX' ? '3 business days' : '5-7 business days',
@@ -173,19 +177,71 @@ export async function determinePermits(details: ProjectDetails): Promise<PermitR
     });
   }
 
+  // Detect Sub-Trades from project scope and details
+  const electricalKeywords = ['wiring', 'outlet', 'circuit', 'light', 'electrical', 'electricity', 'power', 'panel'];
+  const plumbingKeywords = ['bathroom', 'sink', 'toilet', 'shower', 'pipe', 'water', 'drain', 'plumbing', 'faucet'];
+  const hvacKeywords = ['ac', 'heating', 'furnace', 'duct', 'ventilation', 'hvac', 'air conditioning', 'boiler'];
+  const structuralKeywords = ['wall removal', 'load-bearing', 'beam', 'structural', 'foundation', 'framing'];
+
+  if (electricalKeywords.some(kw => scope.includes(kw)) && !permits.some(p => p.name === 'Electrical Permit')) {
+    permits.push({
+      name: 'Electrical Permit',
+      description: 'Required for all new electrical work, including wiring, circuits, and panels.',
+      forms_needed: ['Electrical Permit Application'],
+      fees: state === 'CA' ? 180 : 85,
+      estimated_timeline: '2-5 business days',
+      required_inspections: ['Rough-in', 'Final'],
+      issuing_department: 'Electrical Department'
+    });
+  }
+
+  if (plumbingKeywords.some(kw => scope.includes(kw)) && !permits.some(p => p.name === 'Plumbing Permit')) {
+    permits.push({
+      name: 'Plumbing Permit',
+      description: 'Required for new plumbing fixtures, piping, or drainage systems.',
+      forms_needed: ['Plumbing Permit Application'],
+      fees: state === 'CA' ? 200 : 95,
+      estimated_timeline: '3-7 business days',
+      required_inspections: ['Rough-in (Underground)', 'Rough-in (Above ground)', 'Final'],
+      issuing_department: 'Plumbing Department'
+    });
+  }
+
+  if (hvacKeywords.some(kw => scope.includes(kw)) && !permits.some(p => p.name.includes('Mechanical'))) {
+    permits.push({
+      name: 'Mechanical/HVAC Permit',
+      description: 'Required for installation or replacement of heating, ventilation, and air conditioning systems.',
+      forms_needed: ['Mechanical Permit Application'],
+      fees: state === 'CA' ? 150 : 75,
+      estimated_timeline: '2-5 business days',
+      required_inspections: ['Rough-in', 'Final'],
+      issuing_department: 'Mechanical Department'
+    });
+  }
+
+  if (structuralKeywords.some(kw => scope.includes(kw)) && !permits.some(p => p.name.includes('Building Permit'))) {
+    permits.push({
+      name: 'Structural Permit',
+      description: 'Required for structural alterations, such as wall removals or foundation work.',
+      forms_needed: ['Building Permit Application', 'Structural Engineering Report'],
+      fees: 250,
+      estimated_timeline: '10-15 business days',
+      required_inspections: ['Foundation', 'Framing', 'Final'],
+      issuing_department: 'Building Department'
+    });
+  }
+
   // LLM Augmentation Fallback / Enhancement
-  if (permits.length === 0 || details.project_scope.length > 100) {
-    if (permits.length === 0) {
-      permits.push({
-        name: 'General Construction Permit',
-        description: `Based on your scope: "${details.project_scope}", a general permit is likely required. Consult your local building department for specific requirements in ${details.location_city}, ${details.location_state}.`,
-        forms_needed: ['Building Permit Application', 'Project Description'],
-        fees: state === 'CA' ? 200 : 100,
-        estimated_timeline: state === 'CA' ? '15-20 business days' : '5-15 business days',
-        required_inspections: ['Varies based on scope', 'Final'],
-        issuing_department: 'Building Department'
-      });
-    }
+  if (permits.length === 0) {
+    permits.push({
+      name: 'General Construction Permit',
+      description: `Based on your scope: "${details.project_scope}", a general permit is likely required. Consult your local building department for specific requirements in ${details.location_city}, ${details.location_state}.`,
+      forms_needed: ['Building Permit Application', 'Project Description'],
+      fees: state === 'CA' ? 200 : 100,
+      estimated_timeline: state === 'CA' ? '15-20 business days' : '5-15 business days',
+      required_inspections: ['Varies based on scope', 'Final'],
+      issuing_department: 'Building Department'
+    });
   }
 
   return permits;
