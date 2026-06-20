@@ -45,7 +45,8 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/stripe/webhook', webhookRoutes);
 
 // Serve static files from the React frontend app
-const frontendDistPath = '/home/team/shared/frontend/dist';
+const frontendDistPath = path.join(__dirname, '..', '..', 'frontend', 'dist');
+console.log('Frontend static path:', frontendDistPath);
 app.use(express.static(frontendDistPath));
 
 // All other GET requests not handled before will return the React app
