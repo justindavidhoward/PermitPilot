@@ -1,27 +1,24 @@
 import { Router, Request, Response } from 'express';
-import stripe from '../stripe';
+import stripe, { isStripeEnabled } from '../stripe';
 import { query } from '../db';
 import { v4 as uuidv4 } from 'uuid';
 
 const router = Router();
 
 // Stripe Webhook handler
-// Note: This endpoint must receive raw body to verify signature
 router.post('/', async (req: Request, res: Response) => {
+  if (!isStripeEnabled || !stripe) {
+    console.log('Stripe webhook received but Stripe is disabled. Skipping.');
+    return res.status(200).json({ received: true, disabled: true });
+  }
+
   const sig = req.headers['stripe-signature'] as string;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   let event;
 
   try {
-    // In Express, we usually need body-parser with verify to get raw body
-    // If we're using express.json({ verify: ... }) it will be on req.body
-    // For this environment, we'll assume req.body is the raw body if we configure it right
-    // or we'll just try to parse it.
-    
-    // Actually, stripe.webhooks.constructEvent requires the raw body string/Buffer
     const payload = (req as any).rawBody || req.body;
-    
     event = stripe.webhooks.constructEvent(payload, sig, webhookSecret || '');
   } catch (err: any) {
     console.error(`Webhook Error: ${err.message}`);
@@ -36,7 +33,6 @@ router.post('/', async (req: Request, res: Response) => {
       const stripeCustomerId = session.customer;
       const stripeSubscriptionId = session.subscription;
       
-      // Update subscription in DB
       await handleSubscriptionChange(userId, stripeCustomerId, stripeSubscriptionId, 'active');
       break;
     }
@@ -45,10 +41,8 @@ router.post('/', async (req: Request, res: Response) => {
       const stripeSubscriptionId = subscription.id;
       const status = subscription.status;
       
-      // Find user by stripe subscription ID
       const results = await query(`SELECT user_id FROM subscriptions WHERE stripe_subscription_id = '${stripeSubscriptionId}'`);
       if (results && results.length > 0) {
-        const userId = results[0].user_id;
         await query(`UPDATE subscriptions SET status = '${status}', updated_at = CURRENT_TIMESTAMP WHERE stripe_subscription_id = '${stripeSubscriptionId}'`);
       }
       break;
@@ -68,7 +62,6 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 async function handleSubscriptionChange(userId: string, customerId: string, subscriptionId: string, status: string) {
-  // Check if subscription exists
   const existing = await query(`SELECT id FROM subscriptions WHERE user_id = '${userId}'`);
   
   if (existing && existing.length > 0) {

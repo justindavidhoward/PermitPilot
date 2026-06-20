@@ -1,5 +1,5 @@
 import { Router, Response } from 'express';
-import stripe, { PLANS } from '../stripe';
+import stripe, { PLANS, isStripeEnabled } from '../stripe';
 import { authMiddleware, AuthRequest } from '../middleware/auth';
 import { query } from '../db';
 
@@ -7,11 +7,18 @@ const router = Router();
 
 // Get available plans
 router.get('/', (req, res) => {
-  res.json({ plans: PLANS });
+  res.json({ plans: PLANS, stripeEnabled: isStripeEnabled });
 });
 
 // Create a checkout session
 router.post('/create-checkout-session', authMiddleware, async (req: AuthRequest, res: Response) => {
+  if (!isStripeEnabled || !stripe) {
+    return res.status(503).json({ 
+      error: 'Stripe integration is disabled on this server.',
+      message: 'Please use the direct checkout links provided in the plans list.'
+    });
+  }
+
   try {
     const { priceId } = req.body;
     
@@ -22,14 +29,11 @@ router.post('/create-checkout-session', authMiddleware, async (req: AuthRequest,
     const userId = req.user?.id;
     const userEmail = req.user?.email;
 
-    // In a real app, we'd look up or create a Stripe Customer ID for this user
-    // For now, we'll let Stripe create a new one or handle it via metadata
-    
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
         {
-          price: priceId, // In production, this must be a real Stripe Price ID (e.g. price_123...)
+          price: priceId,
           quantity: 1,
         },
       ],
