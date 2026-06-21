@@ -71,6 +71,33 @@ export async function runMigrations() {
       )
     `);
 
+    query(`
+      CREATE TABLE IF NOT EXISTS notification_queue (
+        id TEXT PRIMARY KEY,
+        to_email TEXT NOT NULL,
+        subject TEXT NOT NULL,
+        body TEXT NOT NULL,
+        status TEXT DEFAULT 'pending',
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        sent_at TEXT
+      )
+    `);
+
+    query(`
+      CREATE TABLE IF NOT EXISTS inspections (
+        id TEXT PRIMARY KEY,
+        project_id TEXT REFERENCES projects(id) ON DELETE CASCADE,
+        permit_requirement_id TEXT REFERENCES permit_requirements(id) ON DELETE CASCADE,
+        name TEXT NOT NULL,
+        status TEXT DEFAULT 'pending',
+        scheduled_at TEXT,
+        completed_at TEXT,
+        notes TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
     console.log('Migrations completed successfully.');
   } catch (error: any) {
     console.error('Migration error:', error.message);

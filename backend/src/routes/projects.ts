@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { query } from '../db';
 import { authMiddleware, AuthRequest } from '../middleware/auth';
 import { determinePermits, ProjectDetails } from '../engine/permitEngine';
+import { EmailService } from '../notifications/emailService';
 import multer from 'multer';
 import fs from 'fs';
 import path from 'path';
@@ -130,6 +131,15 @@ router.post('/:id/determine-permits', authMiddleware, async (req: AuthRequest, r
 
     // Update project status
     await query(`UPDATE projects SET status = 'analyzed', updated_at = CURRENT_TIMESTAMP WHERE id = '${projectId}'`);
+
+    // Send checklist ready email
+    if (req.user?.email) {
+      try {
+        await EmailService.sendChecklistReadyEmail(req.user.email, project.title);
+      } catch (emailError) {
+        console.error('Failed to queue checklist ready email:', emailError);
+      }
+    }
 
     res.json({ 
       message: 'Permits determined successfully', 
@@ -262,6 +272,123 @@ router.get('/:id/documents/:docId/download', authMiddleware, async (req: AuthReq
   } catch (error) {
     console.error('Download document error:', error);
     res.status(500).json({ error: 'Failed to download document' });
+  }
+});
+
+// PATCH /api/projects/:id/permit-requirements/:reqId — update status
+router.patch('/:id/permit-requirements/:reqId', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { status } = req.body;
+    const { id: projectId, reqId } = req.params;
+
+    // Verify project ownership
+    const projects = await query(`SELECT * FROM projects WHERE id = '${projectId}' AND user_id = '${req.user?.id}'`);
+    if (!projects || projects.length === 0) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    // Get current permit requirement details for the email
+    const requirements = await query(`SELECT * FROM permit_requirements WHERE id = '${reqId}' AND project_id = '${projectId}'`);
+    if (!requirements || requirements.length === 0) {
+      return res.status(404).json({ error: 'Permit requirement not found' });
+    }
+
+    const requirement = requirements[0];
+
+    // Update status
+    await query(`UPDATE permit_requirements SET status = '${status}', updated_at = CURRENT_TIMESTAMP WHERE id = '${reqId}'`);
+
+    // Trigger notification if status changed
+    if (status !== requirement.status && req.user?.email) {
+      try {
+        await EmailService.sendStatusUpdateEmail(req.user.email, projects[0].title, requirement.name, status);
+      } catch (emailError) {
+        console.error('Failed to queue status update email:', emailError);
+      }
+    }
+
+    res.json({ message: 'Status updated successfully', status });
+  } catch (error) {
+    console.error('Update permit status error:', error);
+    res.status(500).json({ error: 'Failed to update permit status' });
+  }
+});
+
+// GET /api/projects/:id/inspections — list inspections
+router.get('/:id/inspections', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const projectId = req.params.id;
+    // Verify project ownership
+    const projects = await query(`SELECT * FROM projects WHERE id = '${projectId}' AND user_id = '${req.user?.id}'`);
+    if (!projects || projects.length === 0) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    const inspections = await query(`SELECT * FROM inspections WHERE project_id = '${projectId}'`);
+    res.json({ inspections });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch inspections' });
+  }
+});
+
+// POST /api/projects/:id/inspections — add an inspection
+router.post('/:id/inspections', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const projectId = req.params.id;
+    const { name, permit_requirement_id, scheduled_at, notes } = req.body;
+
+    if (!name) {
+      return res.status(400).json({ error: 'Inspection name is required' });
+    }
+
+    // Verify project ownership
+    const projects = await query(`SELECT * FROM projects WHERE id = '${projectId}' AND user_id = '${req.user?.id}'`);
+    if (!projects || projects.length === 0) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    const id = uuidv4();
+    const reqIdValue = permit_requirement_id ? `'${permit_requirement_id}'` : 'NULL';
+    await query(`INSERT INTO inspections (id, project_id, permit_requirement_id, name, status, scheduled_at, notes) 
+                 VALUES ('${id}', '${projectId}', ${reqIdValue}, '${name.replace(/'/g, "''")}', 'pending', '${scheduled_at || ''}', '${notes?.replace(/'/g, "''") || ''}')`);
+
+    res.status(201).json({ id, message: 'Inspection added successfully' });
+  } catch (error) {
+    console.error('Add inspection error:', error);
+    res.status(500).json({ error: 'Failed to add inspection' });
+  }
+});
+
+// PATCH /api/projects/:id/inspections/:inspectionId — update inspection
+router.patch('/:id/inspections/:inspectionId', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { id: projectId, inspectionId } = req.params;
+    const { status, scheduled_at, completed_at, notes } = req.body;
+
+    // Verify project ownership
+    const projects = await query(`SELECT * FROM projects WHERE id = '${projectId}' AND user_id = '${req.user?.id}'`);
+    if (!projects || projects.length === 0) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    let updateFields = [];
+    if (status) updateFields.push(`status = '${status}'`);
+    if (scheduled_at) updateFields.push(`scheduled_at = '${scheduled_at}'`);
+    if (completed_at) updateFields.push(`completed_at = '${completed_at}'`);
+    if (notes) updateFields.push(`notes = '${notes.replace(/'/g, "''")}'`);
+    
+    updateFields.push(`updated_at = CURRENT_TIMESTAMP`);
+
+    if (updateFields.length === 0) {
+      return res.status(400).json({ error: 'No fields to update' });
+    }
+
+    await query(`UPDATE inspections SET ${updateFields.join(', ')} WHERE id = '${inspectionId}' AND project_id = '${projectId}'`);
+
+    res.json({ message: 'Inspection updated successfully' });
+  } catch (error) {
+    console.error('Update inspection error:', error);
+    res.status(500).json({ error: 'Failed to update inspection' });
   }
 });
 
