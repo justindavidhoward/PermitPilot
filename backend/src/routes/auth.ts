@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { query } from '../db';
 import { authMiddleware, AuthRequest } from '../middleware/auth';
 
+import { EmailService } from '../notifications/emailService';
+
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
@@ -27,6 +29,14 @@ router.post('/register', async (req: Request, res: Response) => {
     const id = uuidv4();
 
     await query(`INSERT INTO users (id, email, password_hash, full_name) VALUES ('${id}', '${email}', '${passwordHash}', '${full_name || ''}')`);
+
+    // Send welcome email
+    try {
+      await EmailService.sendWelcomeEmail(email, full_name);
+    } catch (emailError) {
+      console.error('Failed to queue welcome email:', emailError);
+      // Don't fail registration if email fails
+    }
 
     const token = jwt.sign({ id, email }, JWT_SECRET, { expiresIn: '24h' });
 
